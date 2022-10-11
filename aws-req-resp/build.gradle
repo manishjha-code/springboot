@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        springBootVersion = '2.7.4'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
+    }
+}
+
+ext {
+  set('awsSpringVersion', '2.3.3')
+}
+
+
+subprojects {
+
+	apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'application'
+
+    apply plugin: 'io.spring.dependency-management'
+    dependencyManagement {
+        imports {
+            // 7
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+             mavenBom "io.awspring.cloud:spring-cloud-aws-dependencies:2.3.0"
+        }
+    }
+	
+
+	repositories {
+		mavenCentral()
+	}
+
+	group = 'com.example'
+
+jar {
+	enabled = false
+	}
+	
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-actuator'
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
+
+   //implementation 'org.springframework.cloud:spring-cloud-starter-aws-messaging'
+   implementation group: 'com.amazonaws', name: 'amazon-sqs-java-temporary-queues-client', version: '2.0.0'
+   implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.319'
+   
+   
+	}
+
+}

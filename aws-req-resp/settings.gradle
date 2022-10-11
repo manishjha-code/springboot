@@ -1,0 +1,4 @@
+rootProject.name = 'aws-req-resp'
+
+include "consumer"
+include "producer"

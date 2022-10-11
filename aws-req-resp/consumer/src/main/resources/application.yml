@@ -1,0 +1,11 @@
+server:
+  port: 9400
+  
+cloud:
+ aws:
+   region:
+     static: us-east-1
+     auto: false
+   end-point:
+      uri: https://sqs.us-east-1.amazonaws.com/119322682637/PrimeSQS
+     
